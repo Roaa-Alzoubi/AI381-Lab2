@@ -3,7 +3,7 @@ name: AI381 Lab 2 CI
 on:
   pull_request:
   push:
-  branches:
+   branches:
     - main
     - ci-docker-security
 
