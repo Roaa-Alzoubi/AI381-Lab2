@@ -11,8 +11,13 @@ COPY requirements.txt .
 
 RUN python -m venv /opt/venv \
     && /opt/venv/bin/pip install --no-cache-dir --upgrade pip \
-    && /opt/venv/bin/pip install --no-cache-dir -r requirements.txt
-
+    && /opt/venv/bin/pip install --no-cache-dir -r requirements.txt \
+    && /opt/venv/bin/pip install --no-cache-dir --upgrade \
+       "setuptools>=78.1.1" \
+       "wheel>=0.46.2" \
+       "urllib3>=2.8.0" \
+       "msgpack>=1.2.1" \
+       "jaraco.context>=6.1.0"
 
 FROM python:3.11-slim@sha256:cce12316475d7d56d605f76e1d811d0dc4e7227f2d4afd29951521264f504ff8 AS runtime
 
