@@ -1,5 +1,5 @@
 
-FROM python:3.11-slim AS builder
+FROM python:3.11-slim@sha256:cce12316475d7d56d605f76e1d811d0dc4e7227f2d4afd29951521264f504ff8 AS builder
 
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
     PYTHONDONTWRITEBYTECODE=1 \
@@ -14,7 +14,7 @@ RUN python -m venv /opt/venv \
     && /opt/venv/bin/pip install --no-cache-dir -r requirements.txt
 
 
-FROM python:3.11-slim AS runtime
+FROM python:3.11-slim@sha256:cce12316475d7d56d605f76e1d811d0dc4e7227f2d4afd29951521264f504ff8 AS runtime
 
 ENV PATH="/opt/venv/bin:$PATH" \
     PYTHONDONTWRITEBYTECODE=1 \
