@@ -1,6 +1,7 @@
 
-FROM python:3.11-slim@sha256:cce12316475d7d56d605f76e1d811d0dc4e7227f2d4afd29951521264f504ff8 AS builder
-
+FROM python:3.11-slim@sha256:673719e071ecf27434fd2635bbd8d00f49f4fdd81f243143438a42ced8bedf60 AS builder
+RUN python -m pip install --no-cache-dir --upgrade \
+    "pip>=26.2.2" "setuptools>=84.2.1" "wheel>=0.48.0"
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
@@ -19,8 +20,11 @@ RUN python -m venv /opt/venv \
        "msgpack>=1.2.1" \
        "jaraco.context>=6.1.0"
 
-FROM python:3.11-slim@sha256:cce12316475d7d56d605f76e1d811d0dc4e7227f2d4afd29951521264f504ff8 AS runtime
-
+FROM python:3.11-slim@sha256:673719e071ecf27434fd2635bbd8d00f49f4fdd81f243143438a42ced8bedf60 AS runtime
+RUN python -m pip install --no-cache-dir --upgrade \
+    "pip>=26.2.2" "setuptools>=84.2.1" "wheel>=0.48.0" \
+    && rm -rf /usr/local/lib/python3.11/site-packages/setuptools-79.0.1.dist-info \
+              /usr/local/lib/python3.11/site-packages/setuptools
 ENV PATH="/opt/venv/bin:$PATH" \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1

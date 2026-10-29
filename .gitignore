@@ -5,3 +5,7 @@ __pycache__/
 *.py[cod]
 model_backup.joblib
 .env
+
+# Local Docker and Trivy investigation files
+Dockerfile.backup
+trivy-*.json
