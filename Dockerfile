@@ -1,7 +1,7 @@
 
 FROM python:3.11-slim@sha256:673719e071ecf27434fd2635bbd8d00f49f4fdd81f243143438a42ced8bedf60 AS builder
 RUN python -m pip install --no-cache-dir --upgrade \
-    "pip>=26.2.2" "setuptools>=84.2.1" "wheel>=0.48.0"
+    "pip>=26.2.2" "setuptools>=84.2.1" "wheel>=0.48.0" "urllib3>=2.8.0" "msgpack>=1.2.3" \
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
@@ -14,10 +14,10 @@ RUN python -m venv /opt/venv \
     && /opt/venv/bin/pip install --no-cache-dir --upgrade pip \
     && /opt/venv/bin/pip install --no-cache-dir -r requirements.txt \
     && /opt/venv/bin/pip install --no-cache-dir --upgrade \
-       "setuptools>=78.1.1" \
+       "setuptools>=84.1.1" \
        "wheel>=0.46.2" \
        "urllib3>=2.8.0" \
-       "msgpack>=1.2.1" \
+       "msgpack>=1.2.3" \
        "jaraco.context>=6.1.0"
 
 FROM python:3.11-slim@sha256:673719e071ecf27434fd2635bbd8d00f49f4fdd81f243143438a42ced8bedf60 AS runtime
